@@ -1,3 +1,5 @@
 .vscode/
 
-main
+build/
+
+libs/imgui2/
