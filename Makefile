@@ -6,8 +6,9 @@ EXE = main
 BUILD_DIR = build
 BIN_DIR = bin
 IMGUI_DIR = libs/imgui
+INCLUDE = include
 APP_SRC = src
-SOURCES = $(APP_SRC)/main.cpp
+SOURCES = $(APP_SRC)/Main.cpp $(APP_SRC)/Application.cpp $(APP_SRC)/SerialApp.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
 
@@ -19,7 +20,7 @@ UNAME_S := $(shell uname -s)
 LINUX_GL_LIBS = -lGL
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
+CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends -I$(INCLUDE)
 CXXFLAGS += -g -Wall -Wformat -Werror -Wextra -pedantic
 LIBS =
 
