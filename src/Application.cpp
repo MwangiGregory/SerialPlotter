@@ -14,6 +14,10 @@ Application::Application(int width, int height, const char *app_title)
 {
 }
 
+Application::~Application()
+{
+}
+
 void Application::Init()
 {
     // glfwSetErrorCallback(glfw_error_callback);
@@ -62,6 +66,7 @@ void Application::CreateImGuiContext()
     (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable window docking
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -81,8 +86,8 @@ void Application::Render()
     ImGui::Render();
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    // glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-    // glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0, 0.0, 0.0, 0.5);
+    glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
