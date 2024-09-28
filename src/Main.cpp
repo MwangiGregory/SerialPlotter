@@ -24,6 +24,9 @@ int main(int, char **)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        // Make main window dockable
+        ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
+
         app->Update();
         app->Render();
     }
