@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "serialib.h"
 
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
@@ -7,6 +8,11 @@
 class SerialApplication : public Application
 {
 private:
+    char buffer[1024] = {0};
+    const unsigned int baud_rate = 500000;
+    const char *serial_port_name = "/dev/ttyUSB0";
+    serialib serial;
+
     bool serial_plotter_close = false;
     bool serial_monitor_close = false;
     ImGuiTextBuffer Buf;
@@ -17,25 +23,47 @@ public:
         : Application(width, height, title)
     {
     }
+
     void Setup()
     {
+        if (serial.openDevice(serial_port_name, baud_rate) != 1)
+        {
+            printf("Failed to connect to %s\n", serial_port_name);
+            std::exit(EXIT_FAILURE);
+        }
+        printf("Successful connection to %s\n", serial_port_name);
+    }
+
+    void Destroy()
+    {
+        serial.closeDevice();
     }
 
     void Update()
     {
-        static unsigned long int count = 0;
-
-        ImGui::Begin("Overall");
-        ImGui::ShowDemoWindow();
-        SerialPlotter();
-
-        // Serial Monitor text
-        count++;
-        Buf.appendf("[Count var]: %lu\n", count);
-
+        UpdateSerialMonitor();
         SerialMonitor();
 
-        ImGui::End();
+        SerialPlotter();
+    }
+
+    void UpdateSerialMonitor()
+    {
+        // Serial Monitor text
+        if (serial.isDeviceOpen() && serial.available() > 0)
+        {
+            serial.readString(buffer, '\n', 1024);
+            Buf.appendf("[Serial]: %s\n", buffer);
+        }
+        else if (!serial.isDeviceOpen())
+        {
+
+            serial.closeDevice();
+            if (serial.openDevice(serial_port_name, baud_rate) != 1)
+                Buf.appendf("Serial device is not open. Retrying at %s\n", serial_port_name);
+            else
+                Buf.appendf("Successful connection to %s\n", serial_port_name);
+        }
     }
 
     void SerialPlotter()
