@@ -6,11 +6,13 @@ EXE = main
 BUILD_DIR = build
 BIN_DIR = bin
 IMGUI_DIR = libs/imgui
+SERIAL_LIB_DIR = libs/serialib/lib
 INCLUDE = include
 APP_SRC = src
 SOURCES = $(APP_SRC)/Main.cpp $(APP_SRC)/Application.cpp $(APP_SRC)/SerialApp.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
+SOURCES += $(SERIAL_LIB_DIR)/serialib.cpp
 
 # Object files
 OBJS = $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
@@ -20,7 +22,7 @@ UNAME_S := $(shell uname -s)
 LINUX_GL_LIBS = -lGL
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends -I$(INCLUDE)
+CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends -I$(INCLUDE) -I$(SERIAL_LIB_DIR)
 CXXFLAGS += -g -Wall -Wformat -Werror -Wextra -pedantic
 LIBS =
 
@@ -68,9 +70,14 @@ $(BUILD_DIR)/%.o: $(APP_SRC)/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+$(BUILD_DIR)/%.o: $(SERIAL_LIB_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
 $(BUILD_DIR)/%.o: $(IMGUI_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
 
 $(BUILD_DIR)/%.o: $(IMGUI_DIR)/backends/%.cpp
 	@mkdir -p $(BUILD_DIR)
