@@ -62,6 +62,8 @@ void Application::CreateImGuiContext()
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    // Create ImPlot context
+    ImPlot::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
@@ -98,6 +100,9 @@ void Application::Destroy()
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    // Destroy Implot context
+    ImPlot::DestroyContext();
+    // Destroy ImGui context
     ImGui::DestroyContext();
 
     glfwDestroyWindow(window);
