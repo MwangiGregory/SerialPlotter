@@ -98,12 +98,8 @@ public:
 
     void DebugWindow()
     {
-
-        if (ImGui::Begin("Debug Window"))
-        {
-            ImGui::Text("selected_port_idx: %d\n", selected_port_idx);
-        }
-        ImGui::End();
+        bool show_demo_window;
+        ImPlot::ShowDemoWindow(&show_demo_window);
     }
 
     void SerialMonitor()
