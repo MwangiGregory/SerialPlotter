@@ -80,7 +80,6 @@ $(BUILD_DIR)/%.o: $(IMGUI_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-
 $(BUILD_DIR)/%.o: $(IMGUI_DIR)/backends/%.cpp
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
