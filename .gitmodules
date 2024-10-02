@@ -4,3 +4,6 @@
 [submodule "libs/serialib"]
 	path = libs/serialib
 	url = git@github.com:MwangiGregory/serialib.git
+[submodule "libs/implot"]
+	path = libs/implot
+	url = git@github.com:epezent/implot.git
