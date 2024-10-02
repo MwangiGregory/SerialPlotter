@@ -1,3 +1,6 @@
 [submodule "libs/imgui"]
 	path = libs/imgui
 	url = git@github.com:ocornut/imgui.git
+[submodule "libs/serialib"]
+	path = libs/serialib
+	url = git@github.com:MwangiGregory/serialib.git
