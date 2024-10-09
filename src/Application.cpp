@@ -16,6 +16,16 @@ Application::Application(int width, int height, const char *app_title)
 
 Application::~Application()
 {
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    // Destroy Implot context
+    ImPlot::DestroyContext();
+    // Destroy ImGui context
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }
 
 void Application::Init()
@@ -93,18 +103,4 @@ void Application::Render()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
-}
-
-void Application::Destroy()
-{
-    // Cleanup
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    // Destroy Implot context
-    ImPlot::DestroyContext();
-    // Destroy ImGui context
-    ImGui::DestroyContext();
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
 }
