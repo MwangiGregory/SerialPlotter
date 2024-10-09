@@ -50,7 +50,7 @@ public:
     virtual void Setup() = 0;
     virtual void Update() = 0;
     void Render();
-    void Destroy();
+    virtual void Destroy() = 0;
 };
 
 Application *CreateApplication();

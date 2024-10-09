@@ -34,7 +34,7 @@ public:
     SerialApplication(int width, int height, const char *title);
     void Setup() override;
     void Update() override;
-    void Destroy();
+    void Destroy() override;
     void UpdateSerialMonitor();
     void SerialPlotter();
     void DebugWindow();
