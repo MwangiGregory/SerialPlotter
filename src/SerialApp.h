@@ -3,6 +3,7 @@
 
 #include "Application.h"
 #include "serialib.h"
+#include "Monitor.h"
 #include <string>
 #include <vector>
 
@@ -29,6 +30,9 @@ private:
     bool serial_monitor_close = false;
     ImGuiTextBuffer Buf;
     bool AutoScroll = true;
+
+    SerialPort port;
+    Monitor monitor;
 
 public:
     SerialApplication(int width, int height, const char *title);

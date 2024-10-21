@@ -1,11 +1,12 @@
 #include "SerialApp.h"
+#include "Monitor.h"
 
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
 #define APP_TITLE "Serial Plotter"
 
 SerialApplication::SerialApplication(int width, int height, const char *title)
-    : Application(width, height, title)
+    : Application(width, height, title), monitor(Monitor(&port))
 {
 }
 
@@ -70,8 +71,9 @@ void SerialApplication::SerialPlotter()
 
 void SerialApplication::DebugWindow()
 {
-    bool show_demo_window;
-    ImPlot::ShowDemoWindow(&show_demo_window);
+    // bool show_demo_window;
+    // ImPlot::ShowDemoWindow(&show_demo_window);
+    // ImGui::ShowDemoWindow(&show_demo_window);
 }
 
 void SerialApplication::SerialMonitor()

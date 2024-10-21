@@ -8,9 +8,9 @@ BIN_DIR = bin
 IMGUI_DIR = libs/imgui
 SERIAL_LIB_DIR = libs/serialib/lib
 IMPLOT_DIR = libs/implot
-INCLUDE = include
+INCLUDE = $(APP_SRC)
 APP_SRC = src
-SOURCES = $(APP_SRC)/Main.cpp $(APP_SRC)/Application.cpp $(APP_SRC)/SerialApp.cpp
+SOURCES = $(APP_SRC)/Main.cpp $(APP_SRC)/Application.cpp $(APP_SRC)/SerialApp.cpp $(APP_SRC)/SerialPort.cpp &(APP_SRC)/Monitor.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
 SOURCES += $(IMPLOT_DIR)/implot.cpp $(IMPLOT_DIR)/implot_items.cpp $(IMPLOT_DIR)/implot_demo.cpp
@@ -94,7 +94,7 @@ $(BIN_DIR)/$(UNAME_S)/$(EXE): $(OBJS)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
 # Build target
-all: $(EXE)
+all: $(BIN_DIR)/$(UNAME_S)/$(EXE)
 	@echo Build complete for $(ECHO_MESSAGE)
 
 # Clean target
